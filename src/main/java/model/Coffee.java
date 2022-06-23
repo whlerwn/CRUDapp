@@ -8,6 +8,9 @@ public class Coffee {
     private String country;
     private int amount;
 
+    public Coffee() {
+    }
+
     public Coffee(int id, String name, String country, int amount) {
         this.id = id;
         this.name = name;

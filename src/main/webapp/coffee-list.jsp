@@ -43,9 +43,9 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Sort</th>
                 <th>Country</th>
-                <th>Amount</th>
+                <th>Amount, g</th>
                 <th>Actions</th>
             </tr>
             </thead>

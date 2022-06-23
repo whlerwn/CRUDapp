@@ -87,11 +87,11 @@ public class CoffeeServlet extends HttpServlet {
 
         String name = request.getParameter("name");
         String country = request.getParameter("country");
-        int amount = request.getIntHeader("amount");
+        int amount = Integer.parseInt(request.getParameter("amount"));
 
         Coffee newCoffee = new Coffee(name, country, amount);
         coffeeDAO.insertCoffee(newCoffee);
-        response.sendRedirect("list");
+        response.sendRedirect("/list");
     }
 
     private void deleteCoffee(HttpServletRequest request, HttpServletResponse response)
@@ -100,7 +100,7 @@ public class CoffeeServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         coffeeDAO.deleteCoffee(id);
-        response.sendRedirect("list");
+        response.sendRedirect("/list");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -121,11 +121,11 @@ public class CoffeeServlet extends HttpServlet {
 
         String name = request.getParameter("name");
         String country = request.getParameter("country");
-        int amount = request.getIntHeader("amount");
+        int amount = Integer.parseInt(request.getParameter("amount"));
 
         Coffee coffee = new Coffee(id, name, country, amount);
         coffeeDAO.updateCoffee(coffee);
-        response.sendRedirect("list");
+        response.sendRedirect("/list");
     }
 
     private void listCoffee(HttpServletRequest request, HttpServletResponse response)

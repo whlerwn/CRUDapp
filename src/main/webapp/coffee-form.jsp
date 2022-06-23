@@ -51,22 +51,22 @@
                     </c:if>
 
                     <fieldset class="form-group">
-                        <label>Coffee Name</label> <input type="text"
-                                                        value="<c:out value='${coffee.name}' />" class="form-control"
-                                                        name="name" required="required">
+                        <label>Coffee Sort</label>
+                        <input type="text" value="<c:out value='${coffee.name}' />"
+                               class="form-control" name="name" required="required">
                     </fieldset>
 
 
                     <fieldset class="form-group">
-                        <label>Coffee Country</label> <input type="text"
-                                                           value="<c:out value='${coffee.country}' />" class="form-control"
-                                                           name="country">
+                        <label>Coffee Country</label>
+                        <input type="text" value="<c:out value='${coffee.country}' />"
+                               class="form-control" name="country">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Coffee Amount</label> <input type="number"
-                                                         value="<c:out value='${coffee.amount}' />" class="form-control"
-                                                         name="amount">
+                        <label>Amount in grams</label>
+                        <input type="number" value="<c:out value='${coffee.amount}' />"
+                               class="form-control" name="amount">
                     </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>
