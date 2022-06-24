@@ -35,45 +35,32 @@
 <div class="container col-md-5">
     <div class="card">
         <div class="card-body">
-            <c:if test="${coffee != null}">
-            <form action="update" method="post">
-                </c:if>
-                <c:if test="${coffee == null}">
-                <form action="insert" method="post">
-                    </c:if>
-
-                    <caption>
-                        <h2>
-                            <c:if test="${coffee != null}">
-                                Edit Coffee
-                            </c:if>
-                            <c:if test="${coffee == null}">
-                                Add New Coffee
-                            </c:if>
-                        </h2>
-                    </caption>
-
-                    <c:if test="${coffee != null}">
-                        <input type="hidden" name="id" value="<c:out value='${coffee.id}' />" />
-                    </c:if>
+            <form action="insertorder" method="post">
+                <caption><h2>Add New Order</h2></caption>
+                <input type="hidden" name="id" value="<c:out value='${order.id}' />" />
 
                     <fieldset class="form-group">
-                        <label>Coffee Sort</label>
-                        <input type="text" value="<c:out value='${coffee.name}' />"
-                               class="form-control" name="name" required="required">
+                        <label>Customer</label>
+                        <input type="text" value="<c:out value='${order.customer}' />"
+                               class="form-control" name="customer" required="required">
                     </fieldset>
 
-
                     <fieldset class="form-group">
-                        <label>Coffee Country</label>
-                        <input type="text" value="<c:out value='${coffee.country}' />"
-                               class="form-control" name="country">
+                        <label>Address</label>
+                        <input type="text" value="<c:out value='${order.address}' />"
+                               class="form-control" name="address">
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label>Amount in grams</label>
-                        <input type="number" value="<c:out value='${coffee.amount}' />"
-                               class="form-control" name="amount">
+                        <input type="number" value="<c:out value='${order.sum}' />"
+                               class="form-control" name="sum">
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label>Product number</label>
+                        <input type="number" value="<c:out value='${order.product_id}' />"
+                               class="form-control" name="product_id">
                     </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>

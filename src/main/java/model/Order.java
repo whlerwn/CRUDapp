@@ -14,7 +14,20 @@ public class Order {
     public Order() {
     }
 
-    public Order(String customer, String address, int sum, String sort, String country) {
+    public Order(int productId, int sum) {
+        this.productId = productId;
+        this.sum = sum;
+    }
+
+    public Order(String customer, String address, int productId, int sum) {
+        this.customer = customer;
+        this.address = address;
+        this.productId = productId;
+        this.sum = sum;
+    }
+
+    public Order(int id, String customer, String address, int sum, String sort, String country) {
+        this.id = id;
         this.customer = customer;
         this.address = address;
         this.sum = sum;

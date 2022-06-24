@@ -1,7 +1,9 @@
 package web;
 
 import DAO.CoffeeDAO;
+import DAO.OrderDAO;
 import model.Coffee;
+import model.Order;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +19,11 @@ import java.util.List;
 public class CoffeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CoffeeDAO coffeeDAO;
+    private OrderDAO orderDAO;
 
     public CoffeeServlet() {
         this.coffeeDAO = new CoffeeDAO();
+        this.orderDAO = new OrderDAO();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,6 +59,27 @@ public class CoffeeServlet extends HttpServlet {
             case "/update":
                 try {
                     updateCoffee(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "/orders":
+                try {
+                    orders(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "/insertorder":
+                try {
+                    insertOrder(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "/deleteorder":
+                try {
+                    deleteOrder(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -135,6 +160,38 @@ public class CoffeeServlet extends HttpServlet {
 
         request.setAttribute("listCoffee", listCoffee);
         RequestDispatcher dispatcher = request.getRequestDispatcher("coffee-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void insertOrder(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, SQLException {
+
+        String customer = request.getParameter("customer");
+        String address = request.getParameter("address");
+        int sum = Integer.parseInt(request.getParameter("sum"));
+        int productId = Integer.parseInt(request.getParameter("product_id"));
+
+        Order newOrder = new Order(customer, address, sum, productId);
+        orderDAO.insertOrder(newOrder);
+        response.sendRedirect("/orders");
+    }
+
+    private void deleteOrder(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, SQLException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        orderDAO.deleteOrder(id);
+        response.sendRedirect("/orders");
+    }
+
+    private void orders(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, SQLException, ServletException {
+
+        List<Order> orders = orderDAO.selectAllOrders();
+
+        request.setAttribute("orders", orders);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("order-list.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -30,39 +30,37 @@
         </ul>
     </nav>
 </header>
-
 <br>
+
 <div class="row">
     <div class="container">
-        <h3 class="text-center">List of Coffee</h3>
+        <h3 class="text-center">Orders</h3>
         <hr>
         <div class="container text-left">
-
-            <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
-                New Coffee</a>
+            <a href="<%=request.getContextPath()%>/order-form.jsp" class="btn btn-success">Add
+                New Order</a>
         </div>
         <br>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Customer</th>
+                <th>Address</th>
+                <th>Amount, g</th>
                 <th>Sort</th>
                 <th>Country</th>
-                <th>Amount, g</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="coffee" items="${listCoffee}">
-
+            <c:forEach var="order" items="${orders}">
                 <tr>
-                    <td><c:out value="${coffee.id}" /></td>
-                    <td><c:out value="${coffee.name}" /></td>
-                    <td><c:out value="${coffee.country}" /></td>
-                    <td><c:out value="${coffee.amount}" /></td>
-                    <td><a href="edit?id=<c:out value='${coffee.id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${coffee.id}' />">Delete</a></td>
+                    <td><c:out value="${order.customer}" /></td>
+                    <td><c:out value="${order.address}" /></td>
+                    <td><c:out value="${order.sum}" /></td>
+                    <td><c:out value="${order.sort}" /></td>
+                    <td><c:out value="${order.country}" /></td>
+                    <td><a href="deleteorder?id=<c:out value='${order.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
