@@ -1,71 +1,45 @@
 package model;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
-public class Coffee {
-    private int id;
-    private String name;
-    private String country;
-    private int amount;
+@Entity
+@Table(name = "coffee")
+public class Coffee extends Product {
+
+    @Column(name = "region")
+    private String region;
+
+    @Column(name = "growth_height")
+    private int growthHeight;
 
     public Coffee() {
     }
 
-    public Coffee(int id, String name, String country, int amount) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.amount = amount;
+    public Coffee(String name, String region, int growthHeight) {
+        super(name);
+        this.region = region;
+        this.growthHeight = growthHeight;
     }
 
-    public Coffee(String name, String country, int amount) {
-        this.name = name;
-        this.country = country;
-        this.amount = amount;
+    public Coffee(int id, String name, String region, int growthHeight) {
+        super(id, name);
+        this.region = region;
+        this.growthHeight = growthHeight;
     }
 
-    public int getId() {
-        return id;
+    public String getRegion() {
+        return region;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getName() {
-        return name;
+    public int getGrowthHeight() {
+        return growthHeight;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Coffee coffee = (Coffee) o;
-        return id == coffee.id && amount == coffee.amount && Objects.equals(name, coffee.name) && Objects.equals(country, coffee.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setGrowthHeight(int growthHeight) {
+        this.growthHeight = growthHeight;
     }
 }

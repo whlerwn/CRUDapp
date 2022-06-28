@@ -30,45 +30,44 @@
 <div class="container col-md-5">
     <div class="card">
         <div class="card-body">
-            <c:if test="${coffee != null}">
-            <form action="updatecoffee" method="post">
+            <c:if test="${chocolate != null}">
+            <form action="updatechocolate" method="post">
                 </c:if>
-                <c:if test="${coffee == null}">
-                <form action="insertcoffee" method="post">
+                <c:if test="${chocolate == null}">
+                <form action="insertchocolate" method="post">
                     </c:if>
 
                     <caption>
                         <h2>
-                            <c:if test="${coffee != null}">
-                                Edit Coffee
+                            <c:if test="${chocolate != null}">
+                                Edit Chocolate
                             </c:if>
-                            <c:if test="${coffee == null}">
-                                Add New Coffee
+                            <c:if test="${chocolate == null}">
+                                Add New Chocolate
                             </c:if>
                         </h2>
                     </caption>
 
-                    <c:if test="${coffee != null}">
-                        <input type="hidden" name="id" value="<c:out value='${coffee.id}' />" />
+                    <c:if test="${chocolate != null}">
+                        <input type="hidden" name="id" value="<c:out value='${chocolate.id}' />" />
                     </c:if>
 
                     <fieldset class="form-group">
                         <label>Brand</label>
-                        <input type="text" value="<c:out value='${coffee.name}' />"
-                               class="form-control" name="name" required="required">
+                        <input type="text" value="<c:out value='${chocolate.name}' />"
+                                   class="form-control" name="name" required="required">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Coffee Region</label>
-                        <input type="text" value="<c:out value='${coffee.region}' />"
-                               class="form-control" name="region" required="required">
+                        <label>Percent Of Cocoa</label>
+                        <input type="number" value="<c:out value='${chocolate.percent}' />"
+                               class="form-control" name="percent" required="required">
                     </fieldset>
 
-
                     <fieldset class="form-group">
-                        <label>Coffee Grown Height</label>
-                        <input type="number" value="<c:out value='${coffee.grownHeight}' />"
-                               class="form-control" name="grownHeight">
+                        <label>Country</label>
+                        <input type="text" value="<c:out value='${chocolate.country}' />"
+                               class="form-control" name="country">
                     </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>

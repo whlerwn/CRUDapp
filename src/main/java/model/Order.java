@@ -1,62 +1,45 @@
 package model;
 
-import java.util.Objects;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import java.util.List;
+
+@Entity
+@Table(name = "orders")
 public class Order {
-    private int id;
+
+    @Id
+    @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int orderId;
+
+    @Column(name = "customer")
     private String customer;
-    private String address;
-    private int productId;
-    private int sum;
-    private String country;
-    private String sort;
 
-    public Order() {
+    @Column(name = "amount")
+    private int amount;
+
+    @OneToMany (mappedBy = "order",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    @Fetch(value = FetchMode.JOIN)
+    @Column(name = "product_id")
+    private List<Product> products;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable (name="order_store",
+               joinColumns=@JoinColumn(name="order_id"),
+               inverseJoinColumns=@JoinColumn(name="store_id"))
+    private List<Store> stores;
+
+    public int getOrderId() {
+        return orderId;
     }
 
-    public Order(int productId, int sum) {
-        this.productId = productId;
-        this.sum = sum;
-    }
-
-    public Order(String customer, String address, int productId, int sum) {
-        this.customer = customer;
-        this.address = address;
-        this.productId = productId;
-        this.sum = sum;
-    }
-
-    public Order(int id, String customer, String address, int sum, String sort, String country) {
-        this.id = id;
-        this.customer = customer;
-        this.address = address;
-        this.sum = sum;
-        this.sort = sort;
-        this.country = country;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getCustomer() {
@@ -67,35 +50,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public String getAddress() {
-        return address;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
-    }
-
-    public Order(int id, String customer, String address, int productId, int sum) {
-        this.id = id;
-        this.customer = customer;
-        this.address = address;
-        this.productId = productId;
-        this.sum = sum;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
